@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ucapan Hari Guru</title>
+  <style>
+    :root{
+      --bg: #f5efe6;
+      --text: #3b2f2f;
+      --card: #fff;
+      --accent: #c7a782;
+      --border: #cbb8a0;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+      padding: 24px;
+      text-align: center;
+      flex-direction: column;
+    }
+    .card {
+      margin: 10px auto;
+      background: var(--card);
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      max-width: 640px;
+      width: 100%;
+      animation: fadeIn 0.7s ease;
+      text-align: left;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2{
+      margin:0 0 8px 0;
+      font-size:28px;
+      color:var(--text);
+    }
+    p{margin:8px 0; line-height:1.5; text-align: justify;}
+
+    input[type="password"] {
+      padding: 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      width: 100%;
+      margin-top: 15px;
+      font-size: 17px;
+      box-sizing: border-box;
+      outline: none;
+    }
+    input[type="password"]:focus{box-shadow:0 0 0 4px rgba(199,167,130,0.12)}
+
+    .actions{display:flex; gap:12px; align-items:center; margin-top:12px}
+    .actions button {
+      padding: 10px 18px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      flex-shrink:0;
+    }
+    .actions button:hover{opacity:0.95}
+
+    #content {
+      display: none;
+      padding: 20px;
+      animation: fadeIn 0.6s ease;
+    }
+    .poem {
+      font-style: italic;
+      margin-top: 20px;
+      color: #5b4a4a;
+    }
+
+    /* bunga matahari */
+    .flowers{pointer-events:none}
+    .flower {
+      position: fixed;
+      top: 5vh;
+      font-size: 28px;
+      opacity: 0;
+      animation: fall 2s ease-out forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-20px); opacity: 1; }
+      100% { transform: translateY(80px); opacity: 0; }
+    }
+
+    @media (max-width:480px){
+      h2{font-size:20px}
+      .card{padding:16px}
+    }
+  </style>
+</head>
+<body>
+
+  <div id="lock" class="center">
+    <div class="card">
+      <h2>Masukkan Password</h2>
+      <p>delapan digit pertama NIP Bu Dewi</p>
+      <input type="password" id="pwd" placeholder="Password" aria-label="password" />
+      <div class="actions">
+        <button id="enterBtn">Masuk</button>
+        <span id="error" style="color:red; display:none;">Password salah, coba lagi ya 🙏</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="content" class="center">
+    <div class="card">
+      <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌻</p>
+      <p>terima kasih telah memilih untuk menjadi seorang guru</p>
+      <p>saya bersyukur bisa mengenal Bu Dewi</p>
+      <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,<br>
+      mungkin memang Bu Dewi enggak sebesar matahari,
+      tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
+      berhasil membawa perubahan besar untuk setiap diri</p>
+      <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
+      itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
+      <p>I'm your number one fan pokoknya hehe 😂</p>
+      <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💛</p>
+      <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
+      biar bisa selalu ikut serta mencerdaskan kehidupan bangsa, aamiin 🤲</p>
+
+      <div class="poem">
+        bunga itu memang lama-lama bisa layu<br>
+        tapi ada satu bunga yang tak lekang oleh waktu<br>
+        kalau mau tahu, carilah setelah selamat hari guru
+      </div>
+    </div>
+  </div>
+
+  <div class="flowers"></div>
+
+  <script>
+    function runFlowerOnce() {
+      const container = document.querySelector('.flowers');
+      container.innerHTML = "";
+
+      const total = 14;
+      const spacing = 100 / (total + 1); // biar merata
+
+      for (let i = 1; i <= total; i++) {
+        const f = document.createElement('span');
+        f.className = 'flower';
+        f.textContent = '🌻';
+
+        // posisi horizontal rapi
+        f.style.left = `calc(${spacing * i}vw - 2vw)`;
+
+        // delay sedikit biar ga jatuh barengan
+        f.style.animationDelay = (i * 0.08) + 's';
+
+        container.appendChild(f);
+
+        setTimeout(() => f.remove(), 2500);
+      }
+    }
+
+    function showMessage() {
+      document.getElementById('lock').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    }
+
+    function unlock() {
+      const value = document.getElementById('pwd').value;
+      const error = document.getElementById('error');
+
+      // password BARU
+      if (value === '19760403') {
+        error.style.display = 'none';
+        showMessage();
+        runFlowerOnce();
+      } else {
+        error.style.display = 'inline';
+      }
+    }
+
+    document.getElementById('enterBtn').addEventListener('click', unlock);
+    document.getElementById('pwd').addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter') unlock();
+    });
+  </script>
+
+</body>
+</html>
