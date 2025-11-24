@@ -4,107 +4,173 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ucapan Hari Guru</title>
+
+  <!-- FONT ESTETIK -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg: #f5efe6;
-      --text: #3b2f2f;
-      --card: #fff;
-      --accent: #c7a782;
-      --border: #cbb8a0;
+      --bg: #fdebf2;
+      --text: #4a2c35;
+      --card: rgba(255, 247, 251, 0.65);
+      --accent: #e08aad;
+      --border: #f2c8d8;
     }
-    *{box-sizing:border-box}
+
+    *{box-sizing:border-box;}
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
+      font-family: "Poppins", sans-serif;
       color: var(--text);
-      -webkit-font-smoothing:antialiased;
+
+      /* soft dreamy pink background + subtle blur */
+      background: radial-gradient(circle at top, #ffe4f0 0%, #fbd8e8 40%, #f8d2e4 70%);
+      backdrop-filter: blur(3px);
+
+      /* motif cantik */
+      background-image:
+        linear-gradient(45deg, rgba(227,175,197,0.12) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(227,175,197,0.12) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(227,175,197,0.12) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(227,175,197,0.12) 75%);
+      background-size: 40px 40px;
+      background-position: 0 0, 0 20px, 20px -20px, -20px 0;
     }
+
     .center {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 40px;
       padding: 24px;
       text-align: center;
       flex-direction: column;
     }
+
     .card {
       margin: 10px auto;
       background: var(--card);
-      padding: 22px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      max-width: 640px;
+      padding: 28px;
+      border-radius: 20px;
+      max-width: 680px;
       width: 100%;
-      animation: fadeIn 0.7s ease;
       text-align: left;
-      font-size: 12px;
+      font-size: 15px;
+
+      border: 3px solid var(--border);
+      box-shadow:
+        0 12px 25px rgba(0,0,0,0.05),
+        0 0 35px rgba(255,180,210,0.3);
+
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.7s ease;
+      transition: transform .25s, box-shadow .25s;
     }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.06),
+        0 0 40px rgba(255,180,210,0.38);
+    }
+
+    h2{
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #3e2430;
+      letter-spacing: .5px;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    p{margin:0 0 8px 0; line-height:1.5; text-align: justify;}
+
+    p{
+      margin: 0 0 14px 0;
+      line-height: 1.7;
+      text-align: justify;
+      font-size: 15.5px;
+    }
 
     input[type="password"] {
       padding: 14px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
+      border: 3px dashed var(--border);
+      border-radius: 12px;
       width: 100%;
-      margin-top: 15px;
+      margin-top: 16px;
       font-size: 17px;
-      box-sizing: border-box;
       outline: none;
+      background: #fff5fa;
+      font-family: "Poppins", sans-serif;
+      transition: 0.25s;
     }
-    input[type="password"]:focus{box-shadow:0 0 0 4px rgba(199,167,130,0.12)}
 
-    .actions{display:flex; gap:12px; align-items:center; margin-top:12px}
+    input[type="password"]:focus{
+      box-shadow:0 0 0 5px rgba(227,175,197,0.25);
+      background: #fff0f7;
+    }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:14px
+    }
+
     .actions button {
-      padding: 10px 18px;
+      padding: 11px 20px;
       border: none;
       background: var(--accent);
       color: white;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
-      flex-shrink:0;
+      transition: .25s;
+      font-family: "Poppins", sans-serif;
+      font-weight: 500;
+      letter-spacing: .3px;
+      box-shadow: 0 4px 12px rgba(224,138,173,0.35);
     }
-    .actions button:hover{opacity:0.95}
 
-    #content {
-      display: none;
-      padding: 20px;
+    .actions button:hover{
+      transform: scale(1.07);
+      box-shadow: 0 4px 16px rgba(224,138,173,0.55);
+    }
+
+    #content{
+      display:none;
+      padding:20px;
       animation: fadeIn 0.6s ease;
     }
-    .poem {
-      font-style: italic;
-      margin-top: 20px;
-      color: #5b4a4a;
-    }
 
-    /* bunga matahari */
+    /* bunga jatuh lebih smooth */
     .flowers{pointer-events:none}
     .flower {
       position: fixed;
-      top: 5vh;
-      font-size: 28px;
+      top: 4vh;
+      font-size: 32px;
       opacity: 0;
-      animation: fall 2s ease-out forwards;
+      animation: fall 2.8s ease-out forwards;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
     }
 
     @keyframes fall {
-      0% { transform: translateY(-20px); opacity: 1; }
-      100% { transform: translateY(80px); opacity: 0; }
+      0% { transform: translateY(-20px) rotate(0); opacity: 1; }
+      70% { opacity: 1; }
+      100% { transform: translateY(120px) rotate(40deg); opacity: 0; }
     }
 
     @media (max-width:480px){
-      h2{font-size:20px}
-      .card{padding:16px}
+      h2{font-size:24px}
+      .card{padding:18px}
     }
   </style>
 </head>
+
 <body>
 
   <div id="lock" class="center">
@@ -114,28 +180,28 @@
       <input type="password" id="pwd" placeholder="Password" aria-label="password" />
       <div class="actions">
         <button id="enterBtn">Masuk</button>
-        <span id="error" style="color:red; display:none;">Password salah, coba lagi ya 🙏</span>
+        <span id="error" style="color:#d33; display:none;">Password salah, coba lagi ya 🙏</span>
       </div>
     </div>
   </div>
 
   <div id="content" class="center">
     <div class="card">
-      <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌻</p>
+      <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌸</p>
       <p>terima kasih telah memilih untuk menjadi seorang guru</p>
       <p>saya bersyukur bisa mengenal Bu Dewi</p>
-      <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi, 
+      <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,
       mungkin memang Bu Dewi enggak sebesar matahari,
       tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
       berhasil membawa perubahan besar untuk setiap diri</p>
       <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
       itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
       <p>I'm your number one fan pokoknya hehe 😂</p>
-      <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💛</p>
+      <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💗</p>
       <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
       biar bisa melindungi segenap bangsa Indonesia dan seluruh tumpah darah Indonesia,
-      memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa, 
-      dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan, 
+      memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa,
+      dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan,
       perdamaian abadi, dan keadilan sosial, aamiin 🤲</p>
     </div>
   </div>
@@ -148,22 +214,18 @@
       container.innerHTML = "";
 
       const total = 14;
-      const spacing = 100 / (total + 1); // biar merata
+      const spacing = 100 / (total + 1);
 
       for (let i = 1; i <= total; i++) {
         const f = document.createElement('span');
         f.className = 'flower';
-        f.textContent = '🌻';
+        f.textContent = '🌸';
 
-        // posisi horizontal rapi
         f.style.left = `calc(${spacing * i}vw - 2vw)`;
-
-        // delay sedikit biar ga jatuh barengan
         f.style.animationDelay = (i * 0.08) + 's';
 
         container.appendChild(f);
-
-        setTimeout(() => f.remove(), 2500);
+        setTimeout(() => f.remove(), 3000);
       }
     }
 
@@ -176,7 +238,6 @@
       const value = document.getElementById('pwd').value;
       const error = document.getElementById('error');
 
-      // password BARU
       if (value === '19760403') {
         error.style.display = 'none';
         showMessage();
@@ -194,10 +255,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
