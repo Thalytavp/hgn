@@ -19,9 +19,8 @@
   --petal-color: #f7a8c0;
 }
 
-* { box-sizing:border-box; }
+* { box-sizing:border-box; margin:0; padding:0; }
 body {
-  margin: 0;
   font-family: "Poppins", sans-serif;
   font-size: 10px;
   color: var(--text);
@@ -33,10 +32,22 @@ body {
     linear-gradient(-45deg, transparent 75%, rgba(227,175,197,0.18) 75%);
   background-size: 40px 40px;
   background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* wrapper untuk login & content supaya selalu center */
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* LOGIN FLOWER CARD */
@@ -53,8 +64,9 @@ body {
   text-align: center;
   box-shadow: 0 6px 18px rgba(224,138,173,0.3);
   border: 3px dashed var(--border);
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: absolute;
+  transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+  z-index: 2;
 }
 
 /* Bunga efek kelopak */
@@ -74,7 +86,7 @@ body {
     -35px 0 var(--petal-color),
     -25px -25px var(--petal-color);
   z-index: -1;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .flower-card:hover {
@@ -83,6 +95,13 @@ body {
 }
 .flower-card:hover::before {
   transform: rotate(15deg);
+}
+
+/* hide animasi login */
+.flower-card.hide {
+  opacity: 0;
+  transform: scale(0.3) rotate(-30deg);
+  pointer-events: none;
 }
 
 /* teks */
@@ -135,10 +154,19 @@ button:hover { transform: scale(1.05); opacity: 0.9; }
 
 /* UCAPAN CARD */
 #content {
-  display: none;
-  padding: 20px;
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  z-index: 1;
   max-width: 650px;
-  margin: auto;
+}
+
+#content.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 #content .card {
@@ -161,47 +189,49 @@ button:hover { transform: scale(1.05); opacity: 0.9; }
   font-size: 16px;
   opacity: 0.3;
 }
-#content .card::before { top: 8px; left: 8px; }
-#content .card::after { bottom: 8px; right: 8px; }
+#content .card::before { bottom: 8px; left: 8px; }
+#content .card::after { top: 8px; right: 8px; }
 
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="lock" class="flower-card">
-  <h2>Masukkan Password</h2>
-  <p>delapan digit pertama NIP Bu Dewi</p>
+<div class="wrapper">
+  <!-- LOGIN -->
+  <div id="lock" class="flower-card">
+    <h2>Masukkan Password</h2>
+    <p>delapan digit pertama NIP Bu Dewi</p>
 
-  <div class="password-wrapper">
-    <input type="password" id="pwd" placeholder="Password" />
-    <span class="toggle-eye" id="eye">🙈</span>
+    <div class="password-wrapper">
+      <input type="password" id="pwd" placeholder="Password" />
+      <span class="toggle-eye" id="eye">🙈</span>
+    </div>
+
+    <button id="enterBtn">Masuk</button>
+    <span id="error">Password salah, coba lagi ya 🙏</span>
   </div>
 
-  <button id="enterBtn">Masuk</button>
-  <span id="error">Password salah, coba lagi ya 🙏</span>
-</div>
-
-<!-- UCAPAN -->
-<div id="content">
-  <div class="card">
-    <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌸</p>
-    <p>terima kasih telah memilih untuk menjadi seorang guru</p>
-    <p>saya bersyukur bisa mengenal Bu Dewi</p>
-    <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,
-    mungkin memang Bu Dewi enggak sebesar matahari,
-    tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
-    berhasil membawa perubahan besar untuk setiap diri</p>
-    <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
-    itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
-    <p>I'm your number one fan pokoknya hehe 😂</p>
-    <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💗</p>
-    <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
-    biar bisa melindungi segenap bangsa Indonesia dan seluruh tumpah darah Indonesia,
-    memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa,
-    dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan,
-    perdamaian abadi, dan keadilan sosial, aamiin 🤲</p>
+  <!-- UCAPAN -->
+  <div id="content">
+    <div class="card">
+      <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌸</p>
+      <p>terima kasih telah memilih untuk menjadi seorang guru</p>
+      <p>saya bersyukur bisa mengenal Bu Dewi</p>
+      <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,
+      mungkin memang Bu Dewi enggak sebesar matahari,
+      tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
+      berhasil membawa perubahan besar untuk setiap diri</p>
+      <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
+      itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
+      <p>I'm your number one fan pokoknya hehe 😂</p>
+      <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💗</p>
+      <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
+      biar bisa melindungi segenap bangsa Indonesia dan seluruh tumpah darah Indonesia,
+      memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa,
+      dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan,
+      perdamaian abadi, dan keadilan sosial, aamiin 🤲</p>
+    </div>
   </div>
 </div>
 
@@ -224,8 +254,10 @@ eye.addEventListener('click', () => {
 
 function unlock() {
   if (pwd.value === '19760403') {
-    lock.style.display = "none";
-    content.style.display = "block";
+    lock.classList.add('hide');
+    setTimeout(() => {
+      content.classList.add('show');
+    }, 400); 
     error.style.display = "none";
   } else {
     error.style.display = "block";
