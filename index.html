@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ucapan Hari Guru</title>
 
-<!-- FONT POPPINS -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -15,7 +14,6 @@
   --card: #ffffff;
   --accent: #e08aad;
   --border: #f2c8d8;
-  --flower-border: #f8a8c1;
   --petal-color: #f7a8c0;
 }
 
@@ -32,50 +30,32 @@ body {
     linear-gradient(-45deg, transparent 75%, rgba(227,175,197,0.18) 75%);
   background-size: 40px 40px;
   background-position: 0 0, 0 20px, 20px -20px, -20px 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* wrapper untuk login & content supaya selalu center */
-.wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+/* wrapper */
+.wrapper { position: relative; width: 100%; max-width: 700px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
 
 /* LOGIN FLOWER CARD */
 .flower-card {
-  width: 280px;
-  height: 280px;
-  background: var(--card);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  text-align: center;
+  width: 280px; height: 280px; background: var(--card); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; text-align: center;
   box-shadow: 0 6px 18px rgba(224,138,173,0.3);
   border: 3px dashed var(--border);
-  position: absolute;
+  position: relative; 
   transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
   z-index: 2;
 }
 
-/* Bunga efek kelopak */
 .flower-card::before {
   content: "";
-  position: absolute;
-  top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border-radius: 50%;
-  background: transparent;
+  position: absolute; top: -12px; left: -12px; right: -12px; bottom: -12px;
+  border-radius: 50%; background: transparent;
   box-shadow:
     0 -35px var(--petal-color),
     25px -25px var(--petal-color),
@@ -89,109 +69,63 @@ body {
   transition: transform 0.5s ease;
 }
 
-.flower-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(224,138,173,0.5);
-}
-.flower-card:hover::before {
-  transform: rotate(15deg);
-}
+.flower-card:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(224,138,173,0.5); }
+.flower-card:hover::before { transform: rotate(15deg); }
+.flower-card.hide { opacity: 0; transform: scale(0.3) rotate(-30deg); pointer-events: none; }
 
-/* hide animasi login */
-.flower-card.hide {
-  opacity: 0;
-  transform: scale(0.3) rotate(-30deg);
-  pointer-events: none;
-}
-
-/* teks */
 h2 { font-weight: 500; font-size: 12px; margin: 0 0 6px 0; }
 p { margin: 0 0 12px 0; }
 
-.password-wrapper {
-  position: relative;
-  width: 80%;
-}
+.password-wrapper { position: relative; width: 80%; }
 
 input[type="password"], input[type="text"] {
-  width: 100%;
-  padding: 8px 30px 8px 8px;
-  font-size: 10px;
-  border: 2px dashed var(--border);
-  border-radius: 12px;
-  outline: none;
-  background: #fff0f7;
-  transition: box-shadow 0.2s ease;
+  width: 100%; padding: 8px 30px 8px 8px; font-size: 10px;
+  border: 2px dashed var(--border); border-radius: 12px; outline: none;
+  background: #fff0f7; transition: box-shadow 0.2s ease;
 }
-input[type="password"]:focus, input[type="text"]:focus {
-  box-shadow: 0 0 8px rgba(224,138,173,0.4);
-}
+input[type="password"]:focus, input[type="text"]:focus { box-shadow: 0 0 8px rgba(224,138,173,0.4); }
 
 .toggle-eye {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 14px;
-  user-select: none;
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  cursor: pointer; font-size: 14px; user-select: none;
 }
 
-button {
-  margin-top: 10px;
-  padding: 6px 14px;
-  border: none;
-  border-radius: 12px;
-  background: var(--accent);
-  color: white;
-  cursor: pointer;
-  font-size: 10px;
-  transition: transform 0.2s, opacity 0.2s;
-}
+button { margin-top: 10px; padding: 6px 14px; border: none; border-radius: 12px; background: var(--accent); color: white; cursor: pointer; font-size: 10px; transition: transform 0.2s, opacity 0.2s; }
 button:hover { transform: scale(1.05); opacity: 0.9; }
 
 #error { display:none; color:#d33; font-size:10px; margin-top:6px; }
 
-/* UCAPAN CARD */
+/* UCAPAN CARD - FIXED TOP */
 #content {
-  position: absolute;
+  position: fixed; /* fix ke viewport */
+  top: 10px; /* jarak dari atas layar */
+  left: 50%;
+  transform: translateX(-50%) scale(0.5); /* horizontal center saja */
+  width: 90%;
+  max-width: 650px;
   opacity: 0;
-  transform: scale(0.5);
   pointer-events: none;
   transition: transform 0.5s ease, opacity 0.5s ease;
-  z-index: 1;
-  max-width: 650px;
+  z-index: 100;
 }
 
-#content.show {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
+#content.show { opacity: 1; transform: translateX(-50%) scale(1); pointer-events: auto; }
 
 #content .card {
-  background: var(--card);
-  border: 3px dashed var(--border);
-  padding: 24px;
-  border-radius: 16px;
-  font-size: 10px;
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card); border: 3px dashed var(--border);
+  padding: 24px; border-radius: 16px; font-size: 12px;
+  position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: justify;
 }
-#content .card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(224,138,173,0.3);
-}
-#content .card::before, #content .card::after {
-  content: "🌸";
-  position: absolute;
-  font-size: 16px;
-  opacity: 0.3;
-}
+#content .card:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(224,138,173,0.3); }
+#content .card::before, #content .card::after { content: "🌸"; position: absolute; font-size: 16px; opacity: 0.3; }
 #content .card::before { bottom: 8px; left: 8px; }
 #content .card::after { top: 8px; right: 8px; }
 
+@media (max-width: 480px) {
+  #content { top: 5px; width: 95%; }
+  #content .card { padding: 16px; font-size: 10px; }
+}
 </style>
 </head>
 
@@ -211,27 +145,27 @@ button:hover { transform: scale(1.05); opacity: 0.9; }
     <button id="enterBtn">Masuk</button>
     <span id="error">Password salah, coba lagi ya 🙏</span>
   </div>
+</div>
 
-  <!-- UCAPAN -->
-  <div id="content">
-    <div class="card">
-      <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌸</p>
-      <p>terima kasih telah memilih untuk menjadi seorang guru</p>
-      <p>saya bersyukur bisa mengenal Bu Dewi</p>
-      <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,
-      mungkin memang Bu Dewi enggak sebesar matahari,
-      tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
-      berhasil membawa perubahan besar untuk setiap diri</p>
-      <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
-      itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
-      <p>I'm your number one fan pokoknya hehe 😂</p>
-      <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💗</p>
-      <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
-      biar bisa melindungi segenap bangsa Indonesia dan seluruh tumpah darah Indonesia,
-      memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa,
-      dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan,
-      perdamaian abadi, dan keadilan sosial, aamiin 🤲</p>
-    </div>
+<!-- UCAPAN FIXED TOP -->
+<div id="content">
+  <div class="card">
+    <p>Selamat Hari Guru, Dewi Indah Puspita, S.Pd., M.Pd. 🌸</p>
+    <p>terima kasih telah memilih untuk menjadi seorang guru</p>
+    <p>saya bersyukur bisa mengenal Bu Dewi</p>
+    <p>Bu Dewi itu seperti matahari, berdampak untuk orang banyak di muka bumi,
+    mungkin memang Bu Dewi enggak sebesar matahari,
+    tapi dari hal-hal kecil yang Bu Dewi beri setiap hari,
+    berhasil membawa perubahan besar untuk setiap diri</p>
+    <p>terima kasih sudah mau bercerita tentang pengalaman hidup Bu Dewi selama ini,
+    itu sangat menginspirasi, bikin saya berani untuk bermimpi besar dan bercita-cita tinggi</p>
+    <p>I'm your number one fan pokoknya hehe 😂</p>
+    <p>jangan capek buat berbagi cerita ke saya ya Bu Dewi, saya seneng dengerinnya 💗</p>
+    <p>doa saya, Bu Dewi diberi raga dan jiwa yang sehat serta umur yang panjang oleh Allah Swt.
+    biar bisa melindungi segenap bangsa Indonesia dan seluruh tumpah darah Indonesia,
+    memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa,
+    dan ikut melaksanakan ketertiban dunia yang berdasar kemerdekaan,
+    perdamaian abadi, dan keadilan sosial, aamiin 🤲</p>
   </div>
 </div>
 
@@ -243,31 +177,20 @@ const lock = document.getElementById('lock');
 const content = document.getElementById('content');
 
 eye.addEventListener('click', () => {
-  if (pwd.type === "password") {
-    pwd.type = "text";
-    eye.textContent = "🐵"; // mata terbuka
-  } else {
-    pwd.type = "password";
-    eye.textContent = "🙈"; // mata tertutup
-  }
+  if (pwd.type === "password") { pwd.type = "text"; eye.textContent = "🐵"; } 
+  else { pwd.type = "password"; eye.textContent = "🙈"; }
 });
 
 function unlock() {
   if (pwd.value === '19760403') {
     lock.classList.add('hide');
-    setTimeout(() => {
-      content.classList.add('show');
-    }, 400); 
+    setTimeout(() => { content.classList.add('show'); }, 400); 
     error.style.display = "none";
-  } else {
-    error.style.display = "block";
-  }
+  } else { error.style.display = "block"; }
 }
 
 document.getElementById('enterBtn').addEventListener('click', unlock);
-pwd.addEventListener('keydown', (e)=>{
-  if(e.key === "Enter") unlock();
-});
+pwd.addEventListener('keydown', (e)=>{ if(e.key === "Enter") unlock(); });
 </script>
 
 </body>
